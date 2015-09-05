@@ -1,0 +1,40 @@
+Le lancement du framework est organisé par le fichier /kernel/begin.php
+Il faut tout d'abord charger les fonctions basiques qui permettent de récupérer les chemins principaux (contenus dans /config/config.ini).
+Ces chemins sont chargés par l'appel de la fonction initializePaths().
+Puis, on charge les constantes utilisées dans le site.
+
+Ensuite, à l'aide de la fonction load() (contenue dans /kernel/framework/functions/basic.inc.php), on inclut les différentes classes et autres fonctions.
+On a alors :
+
+[
+        load( 'config/config' );
+        load( 'functions/useful', INC_LOAD );
+        load( 'inc/default', INC_LOAD );
+        load( 'core/cache' );
+        load( 'core/errors' );
+        load( 'templates/constructor' );
+        load( 'lang/lang' );
+        load( 'db/mysql' );
+        load( 'members/member' );
+]
+
+Si l'installation n'a pas encore été effectuée ou que le dossier install n'est pas encore supprimé, alors, il y aura aussi la ligne suivante :
+
+[
+    require_once( ROOT . 'install/install_delete_dir.php' );
+]
+
+Se font ensuite les initialisations d'objets :
+
+[
+    $cache = new cache( false, false );
+    $bdd = new bdd();
+    $member = new member();
+    $config = new config( $cache, $member->getDesign() );
+    $lang = new lang( 'index', $member->getLang() );
+    $tpl = new templatesConstructor();
+
+    $tpl->init( $config );
+]
+
+

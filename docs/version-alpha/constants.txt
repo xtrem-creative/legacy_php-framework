@@ -1,0 +1,91 @@
+inc/default :
+    
+    DEFAULT_LANG
+        * Contient la langue par défaut utilisée par le site et définie lors de l'installation.
+        
+    DEFAULT_DESIGN
+        * Contient le design par défaut utilisé par le site et défini lors de l'installation.
+        
+    DEFAULT_MODULE
+        * Contient le module par défaut affiché par le site et défini lors de l'installation.
+        
+        
+    PREFIXE_BDD
+        * Contient le préfixe associé aux tables de la BDD.
+        
+**
+        
+inc/constants :
+    
+    CLASS_LOAD
+        * Extension des classes dans le framework et dans le site en général.
+    
+    INC_LOAD
+        * Extension des fichiers de fonctions ou de constantes dans le framework et dans le site en général.
+    
+    LANG_LOAD
+        * Extension des fichiers de langue dans le framework et dans le site en général.
+    
+    CACHE_LOAD
+        * Extension des fichiers de cache dans le framework et dans le site en général.
+    
+    
+    DIR_LANG
+        * Chemin vers les fichiers de langue (absolu).
+    
+    DIR_TEMPLATES
+        * Chemin vers les fichiers de templates (absolu).
+            -  header
+            -  footer
+            -  error
+            -  menus
+    
+    DIR_STYLES
+        * Chemin vers les feuilles de style, CSS, (relatif).
+    
+    DIR_CACHE
+        * Chemin vers les fichiers de cache (absolu).
+    
+    
+    ERROR_GLOBAL
+        * Définit le type d'erreur globale qui induit un affichage sur page entière.
+        
+    ERROR_PAGE
+        * Définit le type d'erreur locale qui induit un affichage sur un bloc dans une page.
+    
+    ERROR_404
+        * Contient un numéro d'erreur globale (404).
+        
+    ERROR_403
+        * Contient un numéro d'erreur globale (403).
+    
+    
+    !! /!\ !! LES DEUX CONSTANTES SUIVANTES NE DOIVENT PAS ÊTRE MODIFIÉES !! /!\ !!
+    
+    HASH_PREFIXE
+        * Définit le préfixe utilisé pour le parsage des mots de passe. À NE PAS MODIFIER !
+        
+    HASH_SUFFIXE
+        * Définit le suffixe utilisé pour le parsage des mots de passe. À NE PAS MODIFIER !
+    
+    !! /!\ !! ----------------------------------------------------------- !! /!\ !!
+    
+    
+    EMAIL_MAX_LENGTH
+        * Définit la longueur maximale des emails (est lié à la BDD).
+    
+    RANK_ADMIN
+        * Valeur du rang admin tel qu'enregistré dans la BDD.
+        
+**
+
+db/constants :
+
+    TABLE_MEMBRES
+        * Nom de la table contenant les données sur les membres.
+    
+    TABLE_MENUS
+        * Nom de la table contenant les menus.
+        
+    TABLE_CONFIG
+        * Nom de la table contenant les données de configuration.

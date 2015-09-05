@@ -1,0 +1,22 @@
+La structure du site est la suivante :
+-Un noyau stable situé dans /kernel/. Dans ce noyau :
+--->Un framework, dans /kernel/framework/ contenant un ensemble de classes, de fonctions, de constantes.
+--->Une ou plusieurs librairies dans /kernel/libs/ pouvant être ajoutée en complément.
+--->Un ou des fichiers SQL, dans /kernel/db/ servant de sauvegardes, de futurs modules, etc.
+--->Des fichiers de templates dans /kernel/templates/ pour les parties principales du site : header, footer, menus.
+-Des modules stockés dans /modules/. Ils sont mis dans des dossiers qui ont le module pour nom, accueil, forum, etc.
+--->Y sont stockés les fichiers correspondants
+--->Pourront être ajoutés dans de futurs versions des fichiers de langue et de design.
+-Les fichiers de lang, dans /lang/ :
+--->Ceux-ci sont classés par lang dans des dossiers différents, /lang/fr/, /lang/en/.
+--->Doit y figurer une icône, drapeau, flag.png qui représente l'image.
+--->Un fichier default.lang.php qui contient un tableau appelé $arrayLang.
+-Dans le dossier /config/ :
+--->Le fichier bdd.ini contient les données de connexion au sgbd.
+--->Le fichier config.ini contient les différents chemins vers la racine du site : l'url affichée par le navigateur et le chemin absolu donné par le serveur.
+--->Le fichier infos.ini, qui sera supprimé à la prochaine version, contient le nom du site, la description, le copyright, etc.
+-Le dossier /designs/ contient les différents designs installés sur le CMS :
+--->Chaque design doit avoir un nom en lettres majuscules ou minuscules, en chiffres, en tirets et en "underscores".
+--->Le dossier doit contenir un dossier img, peut-être un dossier CSS, et les autres fichiers .css.
+-Les flux seront stockés dans /feeds/.
+-Les uploads seront stockés dans /uploads/.

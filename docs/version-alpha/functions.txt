@@ -1,0 +1,46 @@
+functions/basic :
+    
+    void load( $dir, $type = CLASS_LOAD );
+        * $dir donne le dossier et le nom du fichier à charger.
+        * $type donne l'extension du fichier, par défaut une classe, mais qui peut prendre les valeurs CLASS_LOAD, INC_LOAD, LANG_LOAD et CACHE_LOAD.
+        * Tous ces fichiers doivent être dans /kernel/framework/.
+    
+    void initializePaths();
+        * Cette fonction va récupérer les données contenues dans /config/config.ini.
+        * Elle définit les constantes ROOT et ROOTU.
+    
+    string getPrefixBDD();
+        * Retourne le préfixe à appliquer devant les noms des tables de la BDD.
+        * Récupère les informations contenues dans /config/bdd.ini.
+        
+    void tplBegin();
+        * Inclut le header et les menus.
+        
+    void tplEnd();
+        * Inclut le footer.
+        
+function/useful :
+
+    mixed getIni( $dir, $parse = true );
+        * Le dossier est l'url, sans ROOT, du fichier.
+        * Si parse est à FALSE, ne fait qu'inclure le fichier.
+        * Si parse est à TRUE, le fichier INI sera parsé avec parse_ini_file.
+        * Si le fichier n'existe pas, la fonction retourne FALSE.
+        
+    mixed echoa( $array );
+        * Alias de print_r crééé pour afficher le rendu entre balises <pre>.
+        
+    string _hash( $string, $prefixe = HASH_PREFIXE, $suffixe = HASH_SUFFIXE );
+        * Cette fonction hache un mot de passe, une variable avec md5, un préfixe et un suffixe.
+        * Par défaut, le préfixe est HASH_PREFIXE et le suffixe est HASH_SUFFIXE.
+        * Les espaces de la chaîne de caractères envoyée sont supprimés.
+        
+    bool check_email( $string );
+        * Vérifie si $string est au format correct pour les emails.
+        * Vérifie si la taille n'est pas trop grande.
+        
+    bool check_pseudo( $string );    
+        * Vérifie si la taille n'est pas trop grande.
+        
+    bool rm( $fichier )
+        * Supprime un fichier ou une arborescence dans le cas d'un dossier.

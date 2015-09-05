@@ -1,0 +1,265 @@
+core/cache :
+    
+    cache
+    [
+        mixed public getCache( $nameCache, $typeExt = CACHE_LOAD );
+            * Retourne le fichier inclu. C'est-à-dire que le fichier est inclu dans load() (cf. fonctionnement de load) et que ce qu'il retourne est retourné ici aussi.
+            * Si le fichier n'existe pas, retourne NULL.
+
+        mixed private load( $file );
+            * Inclus le fichier déterminé par un chemin $file.
+        
+        mixed public rebuildCache( $name );
+            * Retourne false si le cache n'a pas réussi à être recompilé.
+            * Si la méthode _rebuild_cache_$name existe, alors recompile le cache et retourne son contenu.
+        
+        void private _rebuild_cache_menus();
+            * Méthode qui regénère le contenu du cache sur les menus en s'appuyant sur la TABLE_MENUS de la BDD.
+            * Faites attention ici aux droits d'écriture : chmod( DIR_CACHE . 'menus' . CACHE_LOAD, 0777 );
+        
+        void private _rebuild_cache_templates_infos();
+            * Méthode qui regénère le contenu du cache sur les infos sur les templates (à savoir title, copyright, etc.) en s'appuyant sur la table TABLE_CONFIG de la BDD.
+            * Faites attention ici aux droits d'écriture : chmod( DIR_CACHE . 'templates_infos' . CACHE_LOAD, 0777 );
+    ]
+    
+**
+
+core/errors :
+    
+    error
+    [
+        void private findType();
+            * Si le numéro fourni à l'instanciation fait parti du tableau des numéros d'erreurs globales, alors le type est ERROR_GLOBAL.
+            * Sinon, par défaut, c'est une erreur locale donc ERROR_PAGE.
+        
+        string public getType();
+            * Retourne le type d'erreur (ERROR_PAGE | ERROR_GLOBAL).
+        
+        void public addError( string $message, mixed $type = ERROR_PAGE, string $page = false, string $line = false );
+            * Stocke la nouvelle erreur dans $datas.
+            * A besoin OBLIGATOIREMENT d'un message. Le reste est par défaut :
+                -  $type : ERROR_PAGE | ERROR_GLOBAL.
+                -  $page : La page sur laquelle s'est produite l'erreur.
+                -  $line : La ligne sur laquelle s'est produite l'erreur, ce qui peut être pratique pour le débogage.
+        
+        array public getDatas();
+            * Getteur permettant d'accéder à $datas.
+    ]
+
+**
+
+config/config :
+
+    config 
+    [
+        void private extractInfos();
+            * Récupère les données du cache et les charge dans les différents attributs :
+                -  $title;
+                -  $description;
+                -  $copyright;
+            * Si le cache n'existe plus, il le recompile.
+        
+        string public getTitle();
+            * Getteur qui retourne le titre contenu dans $title.
+        
+        string public getCopyright();
+            * Getteur qui retourne le copyright contenu dans $copyright.
+        
+        string public getDescription();
+            * Getteur qui retourne la description contenue dans $description.
+        
+        mixed public getMenus();
+            * Getteur qui retourne les données sur les menus contenues dans $menus.
+        
+        string public getDefaultParam( $parameter );
+            * Retourne, s'il existe le paramètre par défaut demandé (lang, module, design, etc.).
+            * Sinon, la méthode retournera NULL.
+    ]
+    
+**
+
+db/mysql :
+
+    bdd
+    [
+        
+        void public wakeUp();
+            * Remet tout simplement l'instance de la classe $bdd contenue dans self::$pdoS dans $pdo;
+        
+        mixed public query( $requete, $params = false, $error = true );
+            * Effectue la requête $requete avec les paramètres ($params) dans les cas suivants :
+                -  $params est à FALSE, donc sans paramètres : $pdo->execute();
+                -  $params est un tableau, avec le tableau en paramètres : $pdo->execute( $params );
+                -  $params est une chaîne de caractères : $pdo->execute( array( $params ) );
+            * S'il faut afficher les erreurs ($error à TRUE), on ajoute une erreur de type locale.
+            * Retourne la requête effectuée.
+
+        mixed public fetch( $req = false, $mode = PDO::FETCH_ASSOC );
+            * Retourne simplement le résultat de $req->fetch(). 
+                -  Si la fonction a réussi, retourne un tableau si le mode est bien à PDO::FETCH_ASSOC.
+                -  Si la fonction a échoué, retourne false.
+            * Essaye d'exécuter fetch() sur la requête fournie en paramètre.
+
+        int public num_rows( $table, $clauses = '', $params = false );
+            * Retourne le nombre de lignes concernées dans la table $table avec le critère $clauses et les paramètres $params.
+            * Fait appel à query() et à fetch();
+            
+        mixed public execute( $req );
+            * Tente simplement d'exécuter la fonction fournie en paramètres.
+            * Peut retourner FALSE, 0 ou "", ou le nombre de lignes affectées.
+
+        int public countSql( $alias, $table, $clauses = '', $params = false );
+            * Retourne le nombre de lignes dans la table $table telles qu'elles remplissent la clause $clauses avec les paramètres $params.
+            * Très proche de num_rows().
+
+        string public quote( $var );
+            * Utilise $pdo->quote() pour sécuriser la variable et la retourne une fois sécurisée.
+
+        array public requete( $requete, $params = false );
+            * Exécute la requête $requete avec les paramètres $params.
+            * Retourne un array car le mode par défaut est PDO::FETCH_ASSOC.
+            * Permet de récupérer rapidement un résultat lorsqu'on n'extrait qu'une ligne de la BDD.
+
+        int public lastInsertId();
+            * Retourne le dernier ID entré de la dernière requête.
+        
+        bool public extractFile( $file );
+            * Si le fichier $file existe, on l'exécute sans vérifier sa validité car il doit être situé sur le serveur.
+            * Peut-être une faille éventuelle.
+            * Retourne FALSE si le fichier n'existe pas, TRUE sinon.
+    ]
+        
+**
+
+menus/constructor :
+    
+    menusConstructor
+    [
+        array private extract()
+            * Si le menu que l'on tente d'extraire ($side défini par l'instanciation) existe, on le récupère.
+            * Si le fichier de cache est vide, on le recompile.
+        
+        array public getContent()
+            * Getteur permettant d'accéder à $content.
+    ]
+
+**
+        
+templates/constructor :
+
+    templatesConstructor
+    [
+        void public init( config $config );
+            * Instancie les différentes parties de la structure du site (header, footer, menus) qui sont stockées dans les attributs correspondants.            
+        
+        string public display();
+            * Retourne le chemin vers le fichier.
+        
+        void public setFile( $newFile, $dir = DIR_TEMPLATES );
+            * Modifie les données sur le fichier à parser.
+            * Cette méthode ne vérifie pas l'existence du fichier !
+        
+        mixed public get( $param );
+            * Retourne le paramètre s'il existe.
+        
+        mixed public header();
+            * Getteur qui retourne self::$header.
+        
+        mixed public menus()
+            * Getteur qui retourne self::$menus.
+        
+        mixed public footer()
+            * Getteur qui retourne self::$footer.
+    ]    
+
+**
+
+templates/other :
+
+    otherTPL extends templatesConstructor
+    [
+        /
+    ]    
+
+**
+
+templates/menus :
+
+    menus extends templatesConstructor
+    [
+        /
+    ]    
+
+**
+
+templates/footer :
+
+    footer extends templatesConstructor
+    [
+        /
+    ]    
+
+**
+
+templates/header :
+
+    header extends templatesConstructor
+    [
+        void public addStyleSheet( $name, $dir = DIR_STYLES );
+            * Si la feuille de style existe, alors elle est ajoutée à la classe et sera incluse dans le header.
+            * Sinon, il ne se passe rien.
+        
+        void public setStyles( $newArray );
+            * Modifie directement la liste des feuilles de styles.
+    ]    
+
+**
+
+lang/lang : 
+    
+    lang
+    [
+        string public get( $index, $page = false, $params = false );
+            * Si la page n'est pas insérée, on prend la page donnée lors de l'instanciation.
+            * Si le fichier n'a pas encore été récupéré, on le fait.
+            * S'il y a des paramètres, on exécute sprintf en les mettant en paramètre.
+            * Sinon, on vérifie simplement l'existence de la clé et on retourne la valeur correspondante.
+            * Si l'entrée n'existe pas, on retourne la clé.
+
+        void private extractLangFiles( $files = array(), $lang = DEFAULT_LANG );
+            * On inclut le fichier default.lang.php si cela n'a pas encore été fait.
+            * S'il n'y a pas plusieurs fichiers à inclure, on inclut le fichier donné et on oublie pas de le rajouter dans le tableau des fichiers inclus.
+            * Si c'est un tableau, on le parcourt et on suit le même procédé.
+            * Tout est stocké dans $data.
+    ]
+
+**
+            
+members/member :
+    
+    member
+    [
+        void private verifSessions();
+            * Vérifie les valeurs de sessions du membre.
+            * Si :
+                -  Le membre est connecté, on stocke ses identifiants et on retourne TRUE.
+                   On met le statut à `on`.
+                -  Le membre ne l'est pas, c'est un invité, donc Anonyme. On retourne aussi TRUE.
+                   On met le statut à `off`.
+        
+        void public getDataMember();
+            * Extrait les données de la base de données dans la TABLE_MEMBERS.
+            * Les stocke dans les différents attributs de la classe.
+        
+        bool public isConnected();
+            * Getteur permettant d'accéder à $status.
+            * Si $status est `on`, on retourne TRUE sinon FALSE.
+        
+        string public getDesign();
+            * Getteur permettant d'accéder à $design.
+        
+        string public getLang();
+            * Getteur permettant d'accéder à $lang.
+    ]
+    
+**

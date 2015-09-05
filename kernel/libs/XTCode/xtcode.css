@@ -1,0 +1,256 @@
+/*
+Feuille de style du Xtcode
+
+/!\ 
+	-Veuillez commencer la définition du nom par "xtcode_" pour pouvoir faciliter la lecture dans le code
+	-Remettez par ordre alphabétique les définitions et les attributs
+	-Gardez un code propre et valide pour ne pas avoir à repasser lors de la validation et du reformatage des pages
+	-Les définitions du xtcode sont forcément des class, ne cherchez pas compliqué, adoptez le ".nom" :D
+	
+Merci ! :)
+
+Stan 
+*/
+
+
+.xtcode_align-gauche
+{
+	display:block;
+	text-align:left;
+}
+
+.xtcode_align-droite
+{
+	display:block;
+	text-align:right;
+}
+
+.xtcode_align-centre
+{
+	display:block;
+	text-align:center;
+}
+
+.xtcode_barre
+{
+	text-decoration:line-through;
+}
+
+.xtcode_citation
+{
+	margin-left:10px;
+	border-left:4px solid #91cb00;
+	padding-left:4px;
+	padding-bottom:2px;
+}
+
+.xtcode_code
+{
+	text-indent:0;
+}
+
+.xtcode_code pre
+{
+	overflow:auto;
+}
+
+.xtcode_couleur-blanc
+{
+	color:white;
+}
+
+.xtcode_couleur-bleu
+{
+	color:blue;
+}
+
+.xtcode_couleur-bleuc
+{
+	color:#0060c0;
+}
+
+.xtcode_couleur-bleuf
+{
+	color:#000040;
+}
+
+.xtcode_couleur-gris
+{
+	color:gray;
+}
+
+.xtcode_couleur-jaune
+{
+	color:yellow;
+}
+
+.xtcode_couleur-or
+{
+	color:#ffc040;
+}
+
+.xtcode_couleur-orange
+{
+	color:#eab813;
+}
+
+.xtcode_couleur-rouge
+{
+	color:red;
+}
+
+.xtcode_couleur-vertc
+{
+	color:#00a040;
+}
+
+.xtcode_couleur-vertf
+{
+	color:#044b00;
+}
+
+.xtcode_couleur-violet
+{
+	color:#400060;
+}
+
+
+.xtcode_fluo-bleu
+{
+	background-color:#08ADFF;
+}
+
+.xtcode_fluo-jaune
+{
+	background-color:#FAFB31;
+}
+
+.xtcode_fluo-orange
+{
+	background-color:#ff9a0d;
+}
+
+.xtcode_fluo-rose
+{
+	background-color:#FF33A1;
+}
+
+.xtcode_fluo-vert
+{
+	background-color:#0DFE21;
+}
+
+.xtcode_gras
+{
+	font-weight:bold;
+}
+
+.xtcode_h1
+{
+	font-weight:bold;
+	font-size:20px;
+	margin-left:30px;
+	color:#99CC00;
+	display:block;
+	
+}
+
+.xtcode_h2
+{
+	font-size:15px;
+	font-style:italic;
+	margin-left:20px;
+	display:block;
+}
+
+.xtcode_image
+{
+	text-decoration:none;
+	max-height:400px;
+	max-width:600px;
+}
+
+.xtcode_image_normale
+{
+    text-decoration:none;
+}
+
+.xtcode_italique
+{
+	font-style:italic;
+}
+
+.xtcode_liste
+{
+	list-style:circle;
+}
+
+.xtcode_minicode, .xtcode_minicode pre
+{
+	display:inline;
+}
+
+.xtcode_souligne
+{
+	text-decoration:underline;
+}
+
+
+.xtcode_flottant-droite
+{
+	display:block;
+	float:right;
+	margin-left:5px;
+	margin-bottom:10px;
+}
+
+.xtcode_flottant-gauche
+{
+	display:block;
+	float:left;
+	margin-right:5px;
+	margin-bottom:10px;
+}
+
+.xtcode_paragraphe
+{
+	text-indent:20px;
+}
+
+.xtcode_taille_1
+{
+	font-size: 0.6em;
+}
+
+.xtcode_taille_2
+{
+	font-size: 0.8em;
+}
+
+.xtcode_taille_3
+{
+	font-size: 1.4em;
+}
+
+.xtcode_taille_4
+{
+	font-size: 1.8em;
+}
+.xtcode_taille_3
+{
+	font-size:1.4em;
+}
+.xtcode_taille_4
+{
+	font-size:2em;
+}
+
+/*Div de preview*/
+
+.xtcode_div_preview
+{
+	border:solid #e5e5e5 1px;
+	padding:5px;
+	margin-top:5px;
+	width:98%;
+}

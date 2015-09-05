@@ -1,0 +1,62 @@
+core/cache :
+    
+    void cache( $dirCache = DIR_CACHE, $rebuildCache = false );
+        * Le dossier envoyé en paramètre donne le chemin vers le(s) fichier(s) de cache au(x)quel(s) on tente d'accéder.
+        * Si $rebuildCache est à TRUE, alors les caches existants sont regénérés.
+
+core/errors :
+    
+    void error( $issue = false );
+        * Si le numéro est à 0, c'est une erreur "locale" à la page. Sinon elle est globale.
+
+config/config :
+
+    void config( cache $instance = false, $designName = 'base', $loadStructure = false );
+        * La classe a donc besoin d'une instance de la classe cache, d'un nom de design par défaut et de savoir si elle a besoin de charger la structure usuelle, i.e. menus, header et footer.
+
+db/mysql :
+
+    bool bdd( array $infos = false );
+        * Si $infos est à FALSE, la classe récupère ses données de connexion dans le dossier /config/bdd.ini. Sinon, il prend ceux envoyés.
+        * $infos doit NÉCESSAIREMENT contenir les clés `host`, `database`, `login`, `password` et facultativement `displayErrors` qui affichera ou non les erreurs SQL.
+        
+menus/constructor :
+    
+    void menusConstructor( $side = self::SIDE_LEFT );
+        * $side détermine de quel menu il s'agit et permet de sélectionner les données du cache correspondantes.
+        
+templates/constructor :
+    
+    void templatesConstructor( $dir = DIR_TEMPLATES );
+        * $dir donne le chemin vers les fichiers de templates (habituellement dans /kernel/templates/).
+        
+templates/footer : 
+
+    void footer( $copyright = 'Xtrem CMS' ) extends templatesConstructor();
+        * $copyright est le texte à mettre dans le pied de page.
+
+templates/header : 
+
+    void header( $title = 'Xtrem CMS', $description = 'Site', $charset = 'utf8' ) extends templatesConstructor();
+        * Ces informations sont celles nécessaires à l'affichage du header : $title, $description, $charset.
+        
+templates/menus : 
+
+    void menus( $menuDatas = array() ) extends templatesConstructor();
+        * Même constructeur
+        
+templates/other : 
+
+    void $toAddDatas = false( $toAddDatas = false ) extends templatesConstructor();
+        * Stocke $toAddDatas dans $datas. Permet de parser d'autres fichiers de templates.
+
+lang/lang : 
+    
+    void lang( $page = 'index', $lang = 'fr', $dirInclude = DIR_LANG );
+        * $page indique le module par défaut qui sera sélectionné lors de la demande d'une traduction.
+        * $lang donne la langue qui sera "affichée".
+        * $dirInclude contient le chemin vers le fichier de langue.
+        
+members/member :
+    
+    void member();            
